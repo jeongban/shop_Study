@@ -32,6 +32,9 @@ public class SecurityConfig {
                         .failureUrl("/members/login/error")
         );
 
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
         return http.build();
     }
     @Bean
@@ -43,5 +46,4 @@ public class SecurityConfig {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
-
 }
